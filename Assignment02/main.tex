@@ -1,0 +1,277 @@
+% !TEX program = xelatex
+
+\documentclass[12pt, answers]{exam}
+
+\usepackage{amsmath}
+\usepackage[MnSymbol]{mathspec}
+\usepackage{titling}
+\usepackage{geometry}
+
+\newgeometry{hmargin={12mm,17mm}}
+
+\setmainfont[Numbers={Lining,Proportional}]{Minion Pro}
+\setmathsfont(Digits,Latin,Greek)[Numbers={Lining,Proportional}]{Minion Pro}
+
+\DeclareMathAlphabet{\mathbb}{U}{msb}{m}{n}
+
+\pagestyle{headandfoot}
+\runningheadrule
+\footrule
+\extraheadheight{-.3in}
+\extrafootheight{-.75in}
+\firstpageheader{}{}{}
+\runningheader{\large\bfseries MT451P}{\large\bfseries Dheeraj Putta}{\large\bfseries Assignment 2}
+\footer{}{Page \thepage\ of \numpages}{}
+
+\setlength{\droptitle}{-5em}
+
+\title{MT451P - Assignment 2}
+\author{Dheeraj Putta \\ 15329966}
+\date{}
+\newcommand{\norm}[1]{\left\lVert#1\right\rVert}
+\linespread{1.15}
+
+\begin{document}
+    \maketitle
+    \begin{questions}
+        \thispagestyle{foot}
+        \question \begin{parts}
+            \part Find a unit speed parametrisation of the generalised helix, where $a, b > 0$ : \[ \alpha (t) = (a\cos{t}, a\sin{t}, bt) \]
+            \begin{solution}
+                We have that \[\alpha'(u) = (-a\sin{u}, a\cos{u}, b)\] and
+                \begin{align*}
+                    |\alpha'(u)| &= \sqrt{ (-a\sin{u})^2 + (a\cos{u})^2 + b^2)} \\
+                    &= \sqrt{a^2\sin^2 u + a^2 \cos^2 u + b^2} \\
+                    &= \sqrt{a^2(\sin^2 u + \cos^2 u) + b^2} \\
+                    &= \sqrt{a^2 + b^2}
+                \end{align*}
+                Suppose that the original function was defined on the interval $[x, y]$. We now get that
+                \begin{align*}
+                    s(t) = \int_x^t \left|\alpha(u)\right| \;\mathrm{d}u = \int_x^t \sqrt{a^2 + b^2} \;\mathrm{d}u = t\sqrt{a^2 + b^2} - x\sqrt{a^2 + b^2}
+                \end{align*}
+                and the inverse of this function is
+                \begin{align*}
+                    t(s) = x+\frac{s}{\sqrt{a^2+b^2}}
+                \end{align*}
+                So the unit speed parameterisation is
+                \begin{align*}
+                    \Tilde{\alpha}(s) = \alpha(t(s)) = \left(a\cos\left(x + \frac{s}{\sqrt{a^2+b^2}}\right), a\sin\left(x + \frac{s}{\sqrt{a^2+b^2}}\right), \frac{bs}{\sqrt{a^2+b^2}} + bx\right)
+                \end{align*}
+                and the function is defined as $\Tilde{\alpha}: [0, s(y)] \to \mathbb{R}^3$
+            \end{solution}
+
+            \part Compute the acceleration vector to this unit speed parameterisation.
+
+            \begin{solution}
+            We have that \[\Tilde{\alpha}(s) = \left(a\cos\left(x + \frac{s}{\sqrt{a^2+b^2}}\right), a\sin\left(x + \frac{s}{\sqrt{a^2+b^2}}\right), \frac{bs}{\sqrt{a^2+b^2}} + bx\right)\]
+
+            The tangent vector field is equal to
+            \begin{align*}
+                \Tilde{\alpha}'(s) = \left(\frac{-a\sin\left( x + \frac{s}{\sqrt{a^2 + b^2}}\right)}{\sqrt{a^2+b^2}}, \frac{a\cos\left( x + \frac{s}{\sqrt{a^2 + b^2}}\right)}{\sqrt{a^2+b^2}},\frac{b}{\sqrt{a^2+b^2}}\right)
+            \end{align*}
+
+            The acceleration vector field is equal to
+            \begin{align*}
+                \Tilde{\alpha}''(s) = \left( \frac{-a\cos\left( x + \frac{s}{\sqrt{a^2 + b^2}}\right)}{a^2+b^2}, \frac{-a\sin\left( x + \frac{s}{\sqrt{a^2 + b^2}}\right)}{a^2+b^2}, 0 \right)
+            \end{align*}
+            \end{solution}
+
+            \part Sketch a picture showing the curve and its unit tangent and acceleration vector fields.
+
+        \end{parts}
+
+        \newpage
+
+        \question \begin{parts}
+        \part Show that the curve given by
+        \[ \beta(s) = \left( \frac{(1+s)^{3/2}}{3}, \frac{(1-s)^{3/2}}{3}, \frac{s}{\sqrt{2}} \right) \]
+        defined on $s \in (-1, 1)$ is unit speed.
+
+        \begin{solution}
+            We have that
+            \[ \beta'(s) = \left( \frac{\sqrt{1+s}}{2}, -\frac{\sqrt{1-s}}{2}, \frac{1}{\sqrt{2}}\right) \]
+            Then
+            \begin{align*}
+                \left| \beta'(s) \right| &= \sqrt{\left(\frac{\sqrt{1+s}}{2}\right)^2 + \left(-\frac{\sqrt{1-s}}{2}\right)^2 + \left(\frac{1}{\sqrt{2}}\right)^2} \\
+                &= \frac{1 + s + 1 - s + 2}{4}\\
+                &= 1
+            \end{align*}
+            Therefore $\gamma$ is unit speed.
+        \end{solution}
+
+        \part Compute its Frenet frame.
+        \begin{solution}
+            From above we have that
+            \begin{align*}
+                T(s) &= \beta'(s) \\
+                    &= \left( \frac{\sqrt{1+s}}{2}, -\frac{\sqrt{1-s}}{2}, \frac{1}{\sqrt{2}}\right)
+            \end{align*}
+
+
+            Then we have that
+            \[
+                T'(s) = \left( \frac{1}{4\sqrt{1 + s}}, \frac{1}{4\sqrt{1 - s}}, 0 \right)
+            \]
+            and
+            \begin{align*}
+                |T'(s)| &= \sqrt{ \left(\frac{1}{4\sqrt{1 + s}}\right)^2 + \left(\frac{1}{4\sqrt{1 - s}}\right)^2}\\
+                &= \sqrt{\frac{1}{16+16s} + \frac{1}{16-16s}} \\
+                &= \sqrt{\frac{16 - 16s + 16s + 16}{(16-16s)(16+16s)}} \\
+                &= \frac{1}{\sqrt{8 - 8s^2}} \\
+                &= \frac{1}{2\sqrt{2(1-s^2)}}
+            \end{align*}
+            So we get that
+            \begin{align*}
+                N(s) &= \frac{T'(s)}{|T'(s)|} \\
+                &= \left( \frac{1}{4\sqrt{1 + s}}, \frac{1}{4\sqrt{1 - s}}, 0 \right) \cdot 2\sqrt{2(1-s^2)} \\
+                &= \left( \frac{\sqrt{2(1-s^2)}}{2\sqrt{1 + s}}, \frac{\sqrt{2(1-s^2)}}{2\sqrt{1 - s}}, 0 \right) \\
+                &= \left( \frac{\sqrt{-(1-s)}}{\sqrt{2}}, \frac{\sqrt{-(1+s)}}{\sqrt{2}}, 0\right)
+            \end{align*}
+
+            We know that
+            \begin{align*}
+                B(s) &= T(s) \times N(s) \\
+                &= \left( \frac{\sqrt{1+s}}{2}, -\frac{\sqrt{1-s}}{2}, \frac{1}{\sqrt{2}}\right) \times \left( \frac{\sqrt{-(1-s)}}{\sqrt{2}}, \frac{\sqrt{-(1+s)}}{\sqrt{2}}, 0\right) \\
+                &= \left(0, 0, \frac{\sqrt{(-1-s)(-s+1)} - \sqrt{(-1+s)(s+1)}}{4\sqrt{2(1-s^2)}}\right)
+            \end{align*}
+        \end{solution}
+        \end{parts}
+
+        \pagebreak
+
+        \question \begin{parts}
+            \part Show that the curve given by
+        \[ \gamma(s) = \left( \frac{4}{5}\cos{s}, 1 - \sin{s}, -\frac{3}{5}\cos{s} \right) \]
+        determines a circle.
+            \begin{solution}
+                We have that
+            \begin{align*}
+                T(s) &= \gamma'(s) \\
+                    &= \left( -\frac{4}{5}\sin{s}, -\cos{s}, \frac{3}{5}\sin{s} \right)
+            \end{align*}
+
+            Then we have that
+            \begin{align*}
+                T'(s) = \left( -\frac{4}{5}\cos{s}, \sin{s}, \frac{3}{5}\cos{s} \right)
+            \end{align*}
+            and
+            \begin{align*}
+                |T'(s)| &= \sqrt{ \left(-\frac{4}{5}\cos{s}\right)^2 + \left( \sin{s}\right)^2 + \left(\frac{3}{5}\cos{s}\right)^2} \\
+                &= \sqrt{\cos^2 s + \sin^2 s} \\
+                &= 1 \\
+                &= \kappa(s)
+            \end{align*}
+            So we get that $N(s) = T'(s)$ \\
+
+            We know that
+            \begin{align*}
+                B(s) &= T(s) \times N(s) \\
+                &= \left( -\frac{4}{5}\sin{s}, -\cos{s}, \frac{3}{5}\sin{s} \right) \times \left( -\frac{4}{5}\cos{s}, \sin{s}, \frac{3}{5}\cos{s} \right) \\
+                &= \left( \frac{-3}{5}, 0, \frac{-4}{5}\right)
+            \end{align*}
+            and
+            \[
+                B'(s) = (0, 0, 0)
+            \]
+            For the equation $B'(s) = -\tau(s)N(s)$ to hold it must be the case that $\tau = 0$. \\
+
+            Since $\tau = 0$ and $\kappa = 1$ this curves must determine a circle.
+            \end{solution}
+
+            \pagebreak
+
+            \part Find it's centre and radius.
+            \begin{solution}
+                We know that
+                \[ r = \frac{1}{\kappa} = 1 \]
+                and
+                \begin{align*}
+                    c &= \gamma + \frac{1}{\kappa}N \\
+                    &= \left( \frac{4}{5}\cos{s}, 1 - \sin{s}, -\frac{3}{5}\cos{s} \right) + \left( -\frac{4}{5}\cos{s}, \sin{s}, \frac{3}{5}\cos{s} \right) \\
+                    &= (0, 1, 0)
+                \end{align*}
+            \end{solution}
+        \end{parts}
+
+        \question Consider a unit speed curve $\alpha$, with $\kappa > 0$ and $\tau \ne 0$, which lies on the sphere centered at $c \in \mathbb{R}$ of radius $r$.
+        \begin{parts}
+            \part Show that
+            \[ \alpha - c = -\rho N - \rho' \sigma B\]
+            where $\rho = \frac{1}{\kappa}$ and $\sigma = \frac{1}{\tau}$.
+            \begin{solution}
+                We have that
+                \[(\alpha - c)^2 = \alpha^2 -2c\alpha + c^2 = r^2\]
+                Differentiating both sides w.r.t to $s$ gives us that
+                \begin{align*}
+                    2\alpha'\alpha -2c\alpha' &= 0 \\
+                    2\alpha'(\alpha - c) &= 0\\
+                    \alpha'(\alpha - c) &= 0 \\
+                    T(\alpha - c) &= 0 &\text{as } T = \alpha'
+                \end{align*}
+                Differentiating the above again w.r.t $s$, we get that
+                \begin{align*}
+                    T'\alpha + T\alpha' - cT' &= 0\\
+                    T'(\alpha - c) + T^2 &= 0
+                \end{align*}
+                Substituting $T' = \kappa N$, we get
+                \begin{align*}
+                    \kappa N(\alpha - c) + 1 &= 0 \\
+                \end{align*}
+                Differentiating again w.r.t $s$,
+                \begin{align*}
+                    \kappa'N(\alpha - c) + \kappa N'(\alpha - c) + \kappa N\alpha' &= 0 \\
+                    \kappa'N(\alpha - c) + \kappa N'(\alpha - c) &= 0 &\text{as } N\alpha' = NT = 0\\
+                    -\frac{\kappa'}{\kappa} + \kappa N'(\alpha - c) &= 0 &\text{as } N(\alpha - c) = -\frac{1}{\kappa}
+                \end{align*}
+                Substituting $N' = -\kappa T + \tau B$
+                \begin{align*}
+                    -\frac{\kappa'}{\kappa} - \kappa^2T(\alpha - c) + \kappa \tau B(\alpha - c) &= 0 \\
+                    -\frac{\kappa'}{\kappa} + \kappa \tau B(\alpha - c) &= 0 &\text{as } T(\alpha - c) = 0 \\
+                    B(\alpha - c) &= \frac{k'}{k^2\tau} \\
+                    &= \left(\frac{1}{\kappa}\right)' \frac{1}{\tau}
+                \end{align*}
+                We now have the following equations:
+                \begin{align*}
+                    T(\alpha - c) &= 0 \\
+                    N(\alpha - c) &= -\frac{1}{\kappa} \\
+                    B(\alpha - c) &= \left(\frac{1}{\kappa}\right)' \frac{1}{\tau}
+                \end{align*}
+                These 3 equations express the components of the radial vector $\alpha - c$ in the orthonormal frame $T, N, B$, which gives us that
+                \begin{align*}
+                    \alpha - c = -\frac{1}{\kappa} N - \left(\frac{1}{\kappa}\right)'\frac{1}{\tau} B
+                \end{align*}
+            \end{solution}
+
+            \part Deduce a formula for $r$ in terms of $\rho$ and $\sigma$.
+                \begin{solution}
+                From the part above we know that
+                    \begin{align*}
+                        r^2 &= (\alpha - c)^2 \\
+                        &= (-\rho N - \rho' \sigma B)^2
+                    \end{align*}
+                    Since $\norm{N} = \norm{B} = 1$ and $NB = 0$, the above equation reduces to
+                    \begin{align*}
+                        r^2 &= \frac{1}{\kappa^2} + \left( \left( \frac{1}{\kappa} \right)' \frac{1}{\tau} \right)^2 \\
+                        &= \frac{1}{\kappa^2} + \left( -\frac{\kappa'}{\kappa^2}\frac{1}{\tau^2}\right) \\
+                        &= \frac{\kappa'^2 + \kappa^2\tau^2}{\kappa^4\tau^2} \\
+                        r &= \frac{1}{\kappa^2\tau}\sqrt{\kappa'^2 + \kappa^2\tau^2}
+                    \end{align*}
+                \end{solution}
+
+            \part For an arbitrary unit speed curve with $\kappa > 0$ and $\tau \ne 0$, specify conditions on $\rho$ and $\sigma$ which would guarantee that $\alpha$ lies on a sphere of radius $r$.
+            \begin{solution}
+                We want to show that $\alpha$ lies on a sphere of radius $r \iff \rho^2 + (\rho'\sigma)^2 = r^2$.
+                First suppose that $\alpha$ lies on a sphere of radius $r$. Then we have show that
+                \begin{align*}
+                    r^2 &= (-\rho N - \rho'\sigma B)^2 \\
+                    &= \rho^2 + (\rho' \sigma)^2
+                \end{align*}
+                Differentiating both sides we get that
+                \begin{align*}
+                    0 &= 2\rho\rho' + 2(\rho'\sigma)(\rho'' + \rho'\sigma') \\
+                    &=
+                \end{align*}
+            \end{solution}
+        \end{parts}
+    \end{questions}
+\end{document}

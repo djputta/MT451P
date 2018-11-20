@@ -2,10 +2,12 @@
 
 \documentclass[12pt, answers]{exam}
 
-\usepackage{amsmath}
+\usepackage{mathtools}
 \usepackage[MnSymbol]{mathspec}
 \usepackage{titling}
 \usepackage{geometry}
+\usepackage{tikz}
+\usetikzlibrary{arrows}
 
 \newgeometry{hmargin={12mm,17mm}}
 
@@ -29,6 +31,8 @@
 \author{Dheeraj Putta \\ 15329966}
 \date{}
 \newcommand{\norm}[1]{\left\lVert#1\right\rVert}
+\renewcommand{\d}{\mathrm{d}}
+
 \linespread{1.15}
 
 \begin{document}
@@ -77,7 +81,14 @@
             \end{solution}
 
             \part Sketch a picture showing the curve and its unit tangent and acceleration vector fields.
-
+                \begin{center}
+                    \begin{tikzpicture}[x=0.5cm,y=0.5cm,z=0.3cm,>=stealth]
+                        % The axes
+                        \draw[<->] (xyz cs:x=-11) -- (xyz cs:x=11) node[above] {$y$};
+                        \draw[<->] (xyz cs:y=-11) -- (xyz cs:y=11) node[right] {$z$};
+                        \draw[<->] (xyz cs:z=-11) -- (xyz cs:z=11) node[above] {$x$};
+                    \end{tikzpicture}
+                \end{center}
         \end{parts}
 
         \newpage
@@ -238,7 +249,8 @@
                 \end{align*}
                 These 3 equations express the components of the radial vector $\alpha - c$ in the orthonormal frame $T, N, B$, which gives us that
                 \begin{align*}
-                    \alpha - c = -\frac{1}{\kappa} N - \left(\frac{1}{\kappa}\right)'\frac{1}{\tau} B
+                    \alpha - c &= -\frac{1}{\kappa} N + \left(\frac{1}{\kappa}\right)'\frac{1}{\tau} B \\
+                    &= -\rho N - \rho'\sigma B
                 \end{align*}
             \end{solution}
 
@@ -260,17 +272,30 @@
 
             \part For an arbitrary unit speed curve with $\kappa > 0$ and $\tau \ne 0$, specify conditions on $\rho$ and $\sigma$ which would guarantee that $\alpha$ lies on a sphere of radius $r$.
             \begin{solution}
-                We want to show that $\alpha$ lies on a sphere of radius $r \iff \rho^2 + (\rho'\sigma)^2 = r^2$.
-                First suppose that $\alpha$ lies on a sphere of radius $r$. Then we have show that
-                \begin{align*}
-                    r^2 &= (-\rho N - \rho'\sigma B)^2 \\
-                    &= \rho^2 + (\rho' \sigma)^2
-                \end{align*}
-                Differentiating both sides we get that
-                \begin{align*}
-                    0 &= 2\rho\rho' + 2(\rho'\sigma)(\rho'' + \rho'\sigma') \\
-                    &=
-                \end{align*}
+                We assert that the condition
+
+        \[\frac{\tau}{\kappa} \equiv \frac{\d}{\d s} \left(\frac{\kappa'}{\kappa^2 \tau} \right) = -\frac{\d}{\d s} (\rho' \sigma) \]
+
+    is sufficient to guarantee this property. Define
+        \begin{align}
+            c(s) &\coloneqq \alpha(s) + \rho(s)N(s) + \rho'(s)\sigma(s)B(s) \\
+            r^2(s) &\coloneqq \rho(s)^2 + \rho'(s)^2 \sigma(s)^2
+        \end{align}
+
+    These will define the centre and the square of the radius of the circle, respectively, provided they are both constant. Differentiating $(1)$ with respect to $s$, we obtain
+        \begin{align*}
+            c' &= \alpha' + \rho' N + \rho N' + \frac{\d}{\d s}(\rho' \sigma)B + (\rho' \sigma)B' \\
+            &= T + \rho'N + \rho(-\kappa T + \tau B) + \frac{\d}{\d s} (\rho' \sigma)B + (\rho' \sigma)(-\tau N) \\
+            &= \left(\frac{\rho}{\sigma} + \frac{\d}{\d s}(\rho' \sigma) \right)B = \left(\frac{\tau}{\kappa} - \frac{\tau}{\kappa}\right)B \equiv 0
+        \end{align*}
+
+    And thus $c$ is constant, as required. Likewise, differentiating $(2)$ with respect to $s$, we also obtain
+        \begin{align*}
+            r^{2\prime} &= \frac{\d}{\d s} (\rho^2 + (\rho' \sigma)^2) = 2\rho\rho' + 2\rho' \sigma \frac{\d}{\d s}(\rho' \sigma) \\
+            &= 2\rho\rho' - 2\rho'\sigma \frac{\rho}{\sigma} = 2\rho\rho' - 2\rho\rho' = 0
+        \end{align*}
+
+    So $r^2$, and thus $r$, is constant, as required. Overall, our initial assertion is sufficient to guarantee that $\alpha$ lie on a sphere with centre and radius as defined.
             \end{solution}
         \end{parts}
     \end{questions}

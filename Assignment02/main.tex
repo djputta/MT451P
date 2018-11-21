@@ -7,7 +7,9 @@
 \usepackage{titling}
 \usepackage{geometry}
 \usepackage{tikz}
-\usetikzlibrary{arrows}
+\usetikzlibrary{arrows, decorations.markings}
+\usepackage{pgfplots}
+\pgfplotsset{compat=newest}
 
 \newgeometry{hmargin={12mm,17mm}}
 
@@ -81,14 +83,37 @@
             \end{solution}
 
             \part Sketch a picture showing the curve and its unit tangent and acceleration vector fields.
-                \begin{center}
-                    \begin{tikzpicture}[x=0.5cm,y=0.5cm,z=0.3cm,>=stealth]
-                        % The axes
-                        \draw[<->] (xyz cs:x=-11) -- (xyz cs:x=11) node[above] {$y$};
-                        \draw[<->] (xyz cs:y=-11) -- (xyz cs:y=11) node[right] {$z$};
-                        \draw[<->] (xyz cs:z=-11) -- (xyz cs:z=11) node[above] {$x$};
-                    \end{tikzpicture}
-                \end{center}
+                \begin{solution}
+                    \begin{center}
+                        \begin{tikzpicture}[x=0.5cm,y=0.5cm,z=0.3cm,>=stealth]
+                            % % The axes
+                            % \draw[<->] (xyz cs:x=-11) -- (xyz cs:x=11) node[above] {$y$};
+                            % \draw[<->] (xyz cs:y=-11) -- (xyz cs:y=11) node[right] {$z$};
+                            % \draw[<->] (xyz cs:z=-11) -- (xyz cs:z=11) node[above] {$x$};
+                            \begin{axis}[
+                                view={60}{30},
+                                axis line style = ultra thick,
+                                axis lines=center,
+                                height=11cm,
+                                width=12cm,
+                                xtick=\empty,
+                                ytick=\empty,
+                                ztick=\empty,
+                                x label style={anchor=north},
+                                  xlabel={$x$},
+                                y label style={anchor=north},
+                                  ylabel={$y$},
+                                % z label style={anchor=north},
+                                  zlabel={$z$},
+                               ]
+                               \addplot3+[domain=0:5*pi,samples=200,samples y=0, no marks, black, ultra thick]
+                                ({sin(deg(x))},
+                                {cos(deg(x))},
+                                {2*x/(5*pi)});
+                            \end{axis}
+                        \end{tikzpicture}
+                    \end{center}
+                \end{solution}
         \end{parts}
 
         \newpage

@@ -319,3 +319,4 @@ luac.out
 # End of https://www.gitignore.io/api/lua,latex,visualstudiocode
 .vscode/settings.json
 Assignment02/.vscode/settings.json
+Assignment03/.vscode/settings.json

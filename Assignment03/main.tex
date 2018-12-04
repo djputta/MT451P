@@ -1,0 +1,131 @@
+% !TEX program = xelatex
+
+\documentclass[12pt, answers]{exam}
+
+\usepackage{mathtools}
+\usepackage[MnSymbol]{mathspec}
+\usepackage{titling}
+\usepackage{geometry}
+
+
+\newgeometry{hmargin={12mm,17mm}}
+
+\setmainfont[Numbers={Lining,Proportional}]{Minion Pro}
+\setmathsfont(Digits,Latin,Greek)[Numbers={Lining,Proportional}]{Minion Pro}
+
+\DeclareMathAlphabet{\mathbb}{U}{msb}{m}{n}
+
+\pagestyle{headandfoot}
+\runningheadrule
+\footrule
+\extraheadheight{-.3in}
+\extrafootheight{-.75in}
+\firstpageheader{}{}{}
+\runningheader{\large\bfseries MT451P}{\large\bfseries Dheeraj Putta}{\large\bfseries Assignment 3}
+\footer{}{Page \thepage\ of \numpages}{}
+
+\setlength{\droptitle}{-5em}
+
+\title{MT451P - Assignment 3}
+\author{Dheeraj Putta \\ 15329966}
+\date{}
+\newcommand{\norm}[1]{\left\lVert#1\right\rVert}
+\renewcommand{\d}{\mathrm{d}}
+\DeclareMathOperator{\im}{Im}
+
+\linespread{1.15}
+
+\begin{document}
+    \maketitle
+    \begin{questions}
+        \thispagestyle{foot}
+
+        \question Making use of the Implicit Function Theorem, derive the Regular Level Set Theorem.
+        \begin{solution}
+            Let $f : \mathbb{R}^2 \times \mathbb{R} \leftarrow \mathbb{R}$ be a smooth function. Let $c \in \im f$ and define
+            $\Sigma \coloneqq f^{-1}(c) \subseteq \mathbb{R}^3$. Since $c$ is a regular value, we have that $\Sigma$ contains
+            no critical points of $f$. For $p \in \Sigma$, we have that
+            \[ Df_p = \left[\frac{\partial f}{\partial x_1}(p), \frac{\partial f}{\partial x_2}(p), \frac{\partial f}{\partial x_3}(p)\right] \]
+            has a non-zero component. Then by the Implicit Function Theorem, $\exists U \subseteq \mathbb{R}^2, V \subseteq \mathbb{R}$
+            with $p \in U \times V$, and a smooth function $g:U \leftarrow V$, such that $(u_1, u_2, g(u_1, u_2)) \in \Sigma$,
+            $\forall u_1, u_2 \in U$. Then define
+            \[ \tilde{x}: U \leftarrow R^3 :  (u_1, u_2) \to (u_1, u_2, g(u_1, u_2))\]
+            Since $g$ is smooth this must mean that $\tilde{x}$ is smooth as well. Also, since $\tilde{x}(u_1, u_2)$ is
+            uniquely determined by $(u_1, u_2)$, $\tilde{x}$ is injective. Both $\Sigma$ and $g$ vary continuously, which
+            means that $g(p_1, p_2) = p_3$ and $(p_1, p_2, p_3) \in \im \tilde{x}$. By the Implicit Function Theorem we
+            get that $\tilde{x}(u_1, u_2) \in \Sigma, \forall \, (u_1, u_2) \in U$, so $\im \tilde{x} \subseteq \Sigma$.
+            We also know that,
+            \[ \left[ \frac{\partial\tilde{x}_1}{\partial u_1}, \frac{\partial\tilde{x}_2}{\partial u_1}  \frac{\partial\tilde{x}_3}{\partial u_1}\right]
+            \times \left[ \frac{\partial\tilde{x}_1}{\partial u_2}, \frac{\partial\tilde{x}_2}{\partial u_2}  \frac{\partial\tilde{x}_3}{\partial u_2}\right]
+             = [1, 0, g_{u_1}] \times [0, 1, g_{u_2}] = [-g_{u_1}, g_{u_2}, 1] \neq 0\]
+            that is, $\tilde{x}_{u_1} \times \tilde{x}_{u_2}$ is non-zero on all of $U$, which means that $\tilde{x}$ is
+            regular. Since $\tilde{x}$ satisfies the conditions for being a co-ordinate patch containing $p$, and as this
+            hold $\forall \, p \in \Sigma$, $\Sigma$ is a surface.
+        \end{solution}
+
+        \question Which of the following subsets of $\mathbb{R}^3$ are surfaces. Provide a brief justification for your answer in
+        each case.
+
+        \begin{parts}
+            \part The solution set for the equation
+            \[ \frac{1}{3}z^3 - z = \frac{1}{2}x^2 - \frac{1}{2}y^2\]
+
+            \begin{solution}
+                Define
+                \[ f:\mathbb{R}^3 \rightarrow \mathbb{R}: (x, y, z) \to \frac{1}{2}x^2 - \frac{1}{2}y^2 - \frac{1}{3}z^3 + z\]
+                Then
+                \[ \nabla f = \left[x, y, 1 - z^2\right] \]
+                The only points where $\nabla f = 0$ are $(0, 0, \pm 1)$ but since
+                \[ f(0, 0, \pm 1) = \pm 1 \pm \frac{1}{3} \neq 0\]
+                these points are not in $f^{-1}(0)$. Therefore, 0 is a regular value of $f$ and by the Regular Level Set
+                Theorem, the set $f^{-1}(0)$ is a surface.
+            \end{solution}
+
+            \part The sphere $S^2 \subset \mathbb{R}^3$ consisting of all points in $\mathbb{R}^3$ whose distance from the
+            origin is 1.
+
+            \begin{solution}
+                Define
+                \[ f: \mathbb{R}^3 \to \mathbb{R} : (x,y,z) \to (x^2 + y^2 + z^2)\]
+                Then
+                \[ \nabla f = \left[ 2x, 2y, 2z \right] \]
+                The only point where $\nabla f = 0$ is at $(0, 0, 0)$ but since
+                \[ f(0, 0, 0) = 0 \neq 1\]
+                it is not in $f^{-1}(1)$. Therefore 1 is a regular value of $f$ and by the Regular Level Set
+                Theorem, this set is a surface.
+            \end{solution}
+
+            \part The set of points $(x, y, f(x, y))$ where $f: \mathbb{R}^2 \rightarrow \mathbb{R}$ is a smooth function.
+
+            \begin{solution}
+                Define
+                \[ \tilde{x}: \mathbb{R}^2 \rightarrow \mathbb{R}^3 : (x, y) \to (x, y, f(x, y))\]
+                This is a smooth function as $f$ is a smooth function. It is also an injective function as $\tilde{x}$ is
+                uniquely determined by $(x, y)$. Then we get that
+                \[  \left[ \frac{\partial\tilde{x}_1}{\partial x}, \frac{\partial\tilde{x}_2}{\partial x}  \frac{\partial\tilde{x}_3}{\partial x}\right]
+                \times \left[ \frac{\partial\tilde{x}_1}{\partial y}, \frac{\partial\tilde{x}_2}{\partial y}  \frac{\partial\tilde{x}_3}{\partial y}\right]
+                 = [1, 0, f_x] \times [0, 1, f_y] = [-f_x, f_y, 1] \neq \vec{0} \]
+                 Therefore $\tilde{x}_x \times \tilde{x}_y$ is non-zero everywhere and so it is regular. This means that
+                 $\tilde{x}$ is a co-ordinate patch whose domain is all of $\mathbb{R}^2$, meaning it suffices for all inputs
+                 and its image is the set we seek. Theorem that set is a surface.
+            \end{solution}
+
+            \part The subset of $\mathbb{R}^3$ obtained upon revolution about the $z$-axis of the circle given by the
+            equation
+            \[ (x - R)^2 + z^2 = r^2 \]
+            where $R, r > 0$ are constants.
+
+            \begin{solution}
+                We can define this subset by using cylindrical co-ordinates. Define
+                \[ f:\mathbb{R}^3 \rightarrow \mathbb{R} : (d, \theta, z) \to (d-R)^2 + z^2 = d^2 - 2Rd + R^2 + z^2\]
+                Then we get that
+                \[ \nabla f = \left[0, 2d - 2R, 2z \right] \]
+                This is only zero points of the form $(R, \theta, 0)$ for $\theta \in [0, 2\pi)$. But
+                $f(R, \theta, 0) = (R - R)^2 + 0^2 = 0 \neq r^2$ as $r > 0$. This means that $r^2$ is a regular value of $f$.
+                Since $f^{-1}(r^2)$ contains none of the critical points, by the Level Set Theorem, it is a surface.
+
+            \end{solution}
+        \end{parts}
+
+    \end{questions}
+\end{document}

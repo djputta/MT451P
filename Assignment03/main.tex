@@ -42,14 +42,14 @@
 
         \question Making use of the Implicit Function Theorem, derive the Regular Level Set Theorem.
         \begin{solution}
-            Let $f : \mathbb{R}^2 \times \mathbb{R} \leftarrow \mathbb{R}$ be a smooth function. Let $c \in \im f$ and define
+            Let $f : \mathbb{R}^2 \times \mathbb{R} \rightarrow \mathbb{R}$ be a smooth function. Let $c \in \im f$ and define
             $\Sigma \coloneqq f^{-1}(c) \subseteq \mathbb{R}^3$. Since $c$ is a regular value, we have that $\Sigma$ contains
             no critical points of $f$. For $p \in \Sigma$, we have that
             \[ Df_p = \left[\frac{\partial f}{\partial x_1}(p), \frac{\partial f}{\partial x_2}(p), \frac{\partial f}{\partial x_3}(p)\right] \]
             has a non-zero component. Then by the Implicit Function Theorem, $\exists U \subseteq \mathbb{R}^2, V \subseteq \mathbb{R}$
-            with $p \in U \times V$, and a smooth function $g:U \leftarrow V$, such that $(u_1, u_2, g(u_1, u_2)) \in \Sigma$,
+            with $p \in U \times V$, and a smooth function $g:U \rightarrow V$, such that $(u_1, u_2, g(u_1, u_2)) \in \Sigma$,
             $\forall u_1, u_2 \in U$. Then define
-            \[ \tilde{x}: U \leftarrow R^3 :  (u_1, u_2) \to (u_1, u_2, g(u_1, u_2))\]
+            \[ \tilde{x}: U \rightarrow R^3 :  (u_1, u_2) \to (u_1, u_2, g(u_1, u_2))\]
             Since $g$ is smooth this must mean that $\tilde{x}$ is smooth as well. Also, since $\tilde{x}(u_1, u_2)$ is
             uniquely determined by $(u_1, u_2)$, $\tilde{x}$ is injective. Both $\Sigma$ and $g$ vary continuously, which
             means that $g(p_1, p_2) = p_3$ and $(p_1, p_2, p_3) \in \im \tilde{x}$. By the Implicit Function Theorem we

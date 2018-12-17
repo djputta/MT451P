@@ -1,0 +1,89 @@
+% !TEX program = xelatex
+
+\documentclass[12pt, answers]{exam}
+
+\usepackage{mathtools}
+\usepackage[MnSymbol]{mathspec}
+\usepackage{titling}
+\usepackage{geometry}
+
+
+\newgeometry{hmargin={12mm,17mm}}
+
+\setmainfont[Numbers={Lining,Proportional}]{Minion Pro}
+\setmathsfont(Digits,Latin,Greek)[Numbers={Lining,Proportional}]{Minion Pro}
+
+\DeclareMathAlphabet{\mathbb}{U}{msb}{m}{n}
+
+\pagestyle{headandfoot}
+\runningheadrule
+\footrule
+\extraheadheight{-.3in}
+\extrafootheight{-.75in}
+\firstpageheader{}{}{}
+\runningheader{\large\bfseries MT451P}{\large\bfseries Dheeraj Putta}{\large\bfseries Assignment 4}
+\footer{}{Page \thepage\ of \numpages}{}
+
+\setlength{\droptitle}{-5em}
+
+\title{MT451P - Assignment 4}
+\author{Dheeraj Putta \\ 15329966}
+\date{}
+\newcommand{\norm}[1]{\left\lVert#1\right\rVert}
+\renewcommand{\d}{\mathrm{d}}
+\DeclareMathOperator{\im}{Im}
+
+\linespread{1.15}
+
+\begin{document}
+    \maketitle
+    \begin{questions}
+        \thispagestyle{foot}
+        \question Compute the shape operator and Gaussian and mean curvatures for the round sphere of radius $r$, the round
+        cylinder of radius $r$ and any flat plane in $R^3$.
+
+        \begin{solution}
+            asd
+        \end{solution}
+
+        \question Assume that the surface $\Sigma$ is described locally near $p$ as the graph of the function
+        $f: \mathbb{R}^2 \rightarrow \mathbb{R}$, with $p = (0, 0, 0)$. Further suppose that $f$ satisfies
+        \[ f_x(0, 0) = f_y(0, 0) = 0 \]
+        Then prove that the shape operator, $S$, of $\Sigma$ at $p = (0, 0, 0)$, has matrix (in the standard basis)
+        of the following form:
+        \[
+            \text{Matrix } S =
+            \begin{bmatrix}
+                f_{xx}(0, 0) & f_{xy}(0, 0) \\
+                f_{yx}(0, 0) & f_{yy}(0, 0)
+            \end{bmatrix}
+        \]
+
+        \begin{solution}
+            A local parametrization around around $p$ is given by
+            \[ \varphi:(u, v) \to (u, v, f(u, v)) \]
+            Then the normal vector field is given by
+            \[ N = \frac{\varphi_u \times \varphi_v}{|\varphi_u \times \varphi_v|} = \frac{(-f_u, -f_vm, 1)}{\sqrt{1 + f_u^2 + f_v^2}} \]
+            Define $\alpha = \sqrt{1 + f_u^2 + f_v^2}$. Then
+            \begin{align*}
+                \nabla_{\vec{e_1}}N &= \left( \frac{\partial}{\partial u} \left(\frac{-f_u}{\alpha}\right),
+                \frac{\partial}{\partial u} \left(\frac{-f_v}{\alpha}\right), \frac{\partial}{\partial u} \left(\frac{1}{\alpha}\right) \right)\\
+                \nabla_{\vec{e_2}}N &= \left( \frac{\partial}{\partial v} \left(\frac{-f_u}{\alpha}\right),
+                \frac{\partial}{\partial v} \left(\frac{-f_u}{\alpha}\right), \frac{\partial}{\partial v} \left(\frac{1}{\alpha}\right) \right)
+            \end{align*}
+            The derivative will be similar for all of them so we will only work out 1 of them.
+            \[ \frac{\partial}{\partial u}\bigg\rvert_{p = 0} \left( \frac{-f_u}{\alpha} \right) =
+            \frac{-\alpha f_{uu} + \alpha'f_u}{\alpha^2}\bigg\rvert_{p = } = -f_{uu}(0, 0)\]
+            Finally we get that
+            \[-\nabla_{v_1\vec{e}_1 + v_2\vec{e}_2}N = v_1\left( f_{uu}(0, 0), f_{uv}(0, 0), 0 \right) +
+            v_2\left( f_{vu}(0, 0), f_{vv}(0, 0), 0 \right)\]
+            which can be represented as
+            \[
+                \begin{bmatrix}
+                    f_{xx}(0, 0) & f_{xy}(0, 0) \\
+                    f_{yx}(0, 0) & f_{yy}(0, 0)
+                \end{bmatrix}
+            \]
+        \end{solution}
+    \end{questions}
+\end{document}

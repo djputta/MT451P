@@ -6,7 +6,7 @@
 \usepackage[MnSymbol]{mathspec}
 \usepackage{titling}
 \usepackage{geometry}
-
+\usepackage{nicefrac}
 
 \newgeometry{hmargin={12mm,17mm}}
 
@@ -39,12 +39,72 @@
     \maketitle
     \begin{questions}
         \thispagestyle{foot}
-        \question Compute the shape operator and Gaussian and mean curvatures for the round sphere of radius $r$, the round
-        cylinder of radius $r$ and any flat plane in $R^3$.
+        \question Compute the shape operator and Gaussian and mean curvatures for:
 
-        \begin{solution}
-            asd
-        \end{solution}
+        \begin{parts}
+            \part The round sphere of radius $r$.
+
+            \begin{solution}
+                Let $\Sigma = \left\{ (x, y, z) \in \mathbb{R}^3 | x^2 + y^2 + z^2 = r^2\right\}$ and $p \in \Sigma$. We have that
+                \[N = -\frac{1}{r}(x, y, z)\]
+                Then define $\gamma(t) = p + t\vec{v}$ for $\vec{v} \in T_p\Sigma$ such that $\vec{v} = \gamma'(0)$.
+                Then we get that
+                \begin{align*}
+                    S(\vec{v}) &= \nabla_{\vec{v}}N = \frac{d}{dt} \bigg\rvert_{t = 0} N(\gamma(t)) \\
+                    &= \frac{d}{dt} \bigg\rvert_{t = 0} \left(\frac{1}{r}\left( p_1 + t v_1, p_2 + t v_2, p_3 + t v_3 \right)\right) \\
+                    &= \frac{1}{r}\left(v_1, v_2, v_3\right) = \frac{\vec{v}}{r}
+                \end{align*}
+                and
+                \[  \text{Matrix } S =
+                    \begin{pmatrix}
+                        -\frac{1}{r} & 0\\
+                        0 & -\frac{1}{r}
+                    \end{pmatrix}
+                \]
+                From this we get that
+                \begin{align*}
+                    K(p) &= \text{det}(S) = \frac{1}{r^2} \\
+                    H(p) &= \text{Trace}(S) = -\frac{2}{r}
+                \end{align*}
+            \end{solution}
+
+            \part The round cylinder of radius $r$.
+
+            \begin{solution}
+                Let $\Sigma=$ round cylinder of radius $r$. Then $T_p\Sigma$ is spanned by the basis vectors $\vec{e}_1$
+                and $\vec{e}_2$. If we apply the shape operator to both of these vectors we would get that
+                \[ S(\vec{e}_1) = \vec{0} \]
+                as the cylinder is centred around the $x$-axis and it would not have any extrinsic curvature.
+                \[S(\vec{e}_2) = -\frac{\vec{e}_2}{r}\]
+                For $\vec{v} \in T_p\Sigma$,
+                \begin{align*}
+                    S(\vec{v}) &= S(v_1\vec{e}_1, v_2\vec{e}_2) \\
+                    &= v_1(\vec{0}) + v_2\left(-\frac{\vec{e}_2}{r}\right) \\
+                    &= -\frac{v_2\vec{e}_2}{r}
+                \end{align*}
+                and
+                \[  \text{Matrix } S =
+                    \begin{pmatrix}
+                        0 & 0\\
+                        0 & -\frac{1}{r}
+                    \end{pmatrix}
+                \]
+                From this we get that
+                \begin{align*}
+                    K(p) &= \text{det}(S) = 0 \\
+                    H(p) &= \text{Trace}(S) = -\frac{1}{r}
+                \end{align*}
+            \end{solution}
+
+            \part Any flat plane in $\mathbb{R}^3$.
+
+            \begin{solution}
+                Let $\Sigma$ be any flat plane in $\mathbb{R}^3$. Since the shape operator is a measure of curvature and
+                since flat planes have no curvature this must mean that $S = \vec{0}$. This implies that both $K$ and $H$
+                are both zero as well.
+            \end{solution}
+        \end{parts}
+
 
         \question Assume that the surface $\Sigma$ is described locally near $p$ as the graph of the function
         $f: \mathbb{R}^2 \rightarrow \mathbb{R}$, with $p = (0, 0, 0)$. Further suppose that $f$ satisfies
@@ -54,26 +114,26 @@
         \[
             \text{Matrix } S =
             \begin{bmatrix}
-                f_{xx}(0, 0) & f_{xy}(0, 0) \\
-                f_{yx}(0, 0) & f_{yy}(0, 0)
+                f_{xx}(0, 0) & f_{x y}(0, 0) \\
+                f_{y x}(0, 0) & f_{y y}(0, 0)
             \end{bmatrix}
         \]
 
         \begin{solution}
             A local parametrization around around $p$ is given by
-            \[ \varphi:(u, v) \to (u, v, f(u, v)) \]
+            \[ \phi:(u, v) \to (u, v, f(u, v)) \]
             Then the normal vector field is given by
-            \[ N = \frac{\varphi_u \times \varphi_v}{|\varphi_u \times \varphi_v|} = \frac{(-f_u, -f_vm, 1)}{\sqrt{1 + f_u^2 + f_v^2}} \]
+            \[ N = \frac{\phi_u \times \phi_v}{|\phi_u \times \phi_v|} = \frac{(-f_u, -f_v, 1)}{\sqrt{1 + f_u^2 + f_v^2}} \]
             Define $\alpha = \sqrt{1 + f_u^2 + f_v^2}$. Then
             \begin{align*}
                 \nabla_{\vec{e_1}}N &= \left( \frac{\partial}{\partial u} \left(\frac{-f_u}{\alpha}\right),
                 \frac{\partial}{\partial u} \left(\frac{-f_v}{\alpha}\right), \frac{\partial}{\partial u} \left(\frac{1}{\alpha}\right) \right)\\
                 \nabla_{\vec{e_2}}N &= \left( \frac{\partial}{\partial v} \left(\frac{-f_u}{\alpha}\right),
-                \frac{\partial}{\partial v} \left(\frac{-f_u}{\alpha}\right), \frac{\partial}{\partial v} \left(\frac{1}{\alpha}\right) \right)
+                \frac{\partial}{\partial v} \left(\frac{-f_v}{\alpha}\right), \frac{\partial}{\partial v} \left(\frac{1}{\alpha}\right) \right)
             \end{align*}
             The derivative will be similar for all of them so we will only work out 1 of them.
             \[ \frac{\partial}{\partial u}\bigg\rvert_{p = 0} \left( \frac{-f_u}{\alpha} \right) =
-            \frac{-\alpha f_{uu} + \alpha'f_u}{\alpha^2}\bigg\rvert_{p = } = -f_{uu}(0, 0)\]
+            \frac{-\alpha f_{uu} + \alpha'f_u}{\alpha^2}\bigg\rvert_{p = 0} = -f_{uu}(0, 0)\]
             Finally we get that
             \[-\nabla_{v_1\vec{e}_1 + v_2\vec{e}_2}N = v_1\left( f_{uu}(0, 0), f_{uv}(0, 0), 0 \right) +
             v_2\left( f_{vu}(0, 0), f_{vv}(0, 0), 0 \right)\]
@@ -84,6 +144,172 @@
                     f_{yx}(0, 0) & f_{yy}(0, 0)
                 \end{bmatrix}
             \]
+        \end{solution}
+
+        \question In each case assume that the surface $\Sigma$ is described locally near $p$ as the graph of the function
+        $f:\mathbb{R}^2 \rightarrow \mathbb{R}$, with $p = (0, 0, 0)$. Compute the shape operator, $S$, at $p$ and then the
+        Gaussian and mean curvatures of $\Sigma$ at $p$ in each case.
+
+        \begin{parts}
+            \part $f(x, y) = x^2 + 3y^2$.
+
+            \begin{solution}
+                First we check if $f$ satisfies the condition mentioned in Q2.
+                We have that $f_x = 2x$ and $f_y = 6y$, so $f_x(0, 0) = 0 = f_y(0, 0)$. Then from Q2 we get that
+                \[
+                    \text{Matrix } S =
+                    \begin{bmatrix}
+                        2 & 0 \\
+                        0 & 6
+                    \end{bmatrix}
+                \]
+                and
+                \begin{align*}
+                    K(p) &= \text{det}(S) = 12 \\
+                    H(p) &= \text{Trace}(S) = 8
+                \end{align*}
+            \end{solution}
+
+            \part $f(x, y) = x^2 - y^2$.
+
+            \begin{solution}
+                First we check if $f$ satisfies the condition mentioned in Q2.
+                We have that $f_x = 2x$ and $f_y = -2y$, so $f_x(0, 0) = 0 = f_y(0, 0)$. Then from Q2 we get that
+                \[
+                    \text{Matrix } S =
+                    \begin{bmatrix}
+                        2 & 0 \\
+                        0 & -2
+                    \end{bmatrix}
+                \]
+                and
+                \begin{align*}
+                    K(p) &= \text{det}(S) = 4 \\
+                    H(p) &= \text{Trace}(S) = 0
+                \end{align*}
+            \end{solution}
+
+            \part $f(x, y) = xy$.
+
+            \begin{solution}
+                First we check if $f$ satisfies the condition mentioned in Q2.
+                We have that $f_x = y$ and $f_y = x$, so $f_x(0, 0) = 0 = f_y(0, 0)$. Then from Q2 we get that
+                \[
+                    \text{Matrix } S =
+                    \begin{bmatrix}
+                        0 & 1 \\
+                        1 & 0
+                    \end{bmatrix}
+                \]
+                and
+                \begin{align*}
+                    K(p) &= \text{det}(S) = -1 \\
+                    H(p) &= \text{Trace}(S) = 0
+                \end{align*}
+            \end{solution}
+
+            \part $f(x, y) = x^3 + y^2$.
+
+            \begin{solution}
+                First we check if $f$ satisfies the condition mentioned in Q2.
+                We have that $f_x = 3x^2$ and $f_y = 2y$, so $f_x(0, 0) = 0 = f_y(0, 0)$. Then from Q2 we get that
+                \[
+                    \text{Matrix } S =
+                    \begin{bmatrix}
+                        0 & 0 \\
+                        0 & 2
+                    \end{bmatrix}
+                \]
+                and
+                \begin{align*}
+                    K(p) &= \text{det}(S) = 0 \\
+                    H(p) &= \text{Trace}(S) = 2
+                \end{align*}
+            \end{solution}
+
+            \part $f(x, y) = x\left(x+y\sqrt{3}\right)\left(x-y\sqrt{3}\right)$.
+
+            \begin{solution}
+                First we check if $f$ satisfies the condition mentioned in Q2.
+                We have that $f_x = 3x^2 + 3y^2$ and $f_y = 6xy$, so $f_x(0, 0) = 0 = f_y(0, 0)$. Then from Q2 we get that
+                \[
+                    \text{Matrix } S =
+                    \begin{bmatrix}
+                        0 & 0 \\
+                        0 & 0
+                    \end{bmatrix}
+                \]
+                and
+                \begin{align*}
+                    K(p) &= \text{det}(S) = 0 \\
+                    H(p) &= \text{Trace}(S) = 0
+                \end{align*}
+            \end{solution}
+
+            \part $f(x, y) = y^2$.
+
+            \begin{solution}
+                First we check if $f$ satisfies the condition mentioned in Q2.
+                We have that $f_x = 0$ and $f_y = 2y$, so $f_x(0, 0) = 0 = f_y(0, 0)$. Then from Q2 we get that
+                \[
+                    \text{Matrix } S =
+                    \begin{bmatrix}
+                        0 & 0 \\
+                        0 & 2
+                    \end{bmatrix}
+                \]
+                and
+                \begin{align*}
+                    K(p) &= \text{det}(S) = 0 \\
+                    H(p) &= \text{Trace}(S) = 2
+                \end{align*}
+            \end{solution}
+        \end{parts}
+
+        \question Suppose $M$ is the cylindrical surface given by the equation $x^2 + y^2 = 100$. Show that the curve
+        \[ \alpha(t) = \left( 10\cos(2t + 1), 10\sin(2t + 1), 2t+1 \right) \]
+        is a geodesic on $M$.
+
+        \begin{solution}
+            Consider the following parametrization $\phi: \mathbb{R}^2 \rightarrow M$ given by
+            \[ \phi(u, v) = \left( 10\cos(2u + 1), 10\sin(2u + 1), v \right)\]
+            Note that
+            \begin{align*}
+                \phi_u &= (-20\sin \left(2u+1\right), 20\cos \left(2u+1\right), 0) \\
+                \phi_v &= (0, 0, 1) \\
+                \phi_u \times \phi_v &= \left(20\cos\left(2u+1\right), 20\sin \left(2u+1\right), 0\right) \\
+                |\phi_u \times \phi_v| &= 20\sqrt{\cos ^2\left(2u+1\right)+\sin ^2\left(2u+1\right)} = 20
+            \end{align*}
+            Using the above we get that
+            \[
+                N = \frac{\phi_u \times \phi_v}{|\phi_u \times \phi_v|} = \left(\cos\left(2u+1\right), \sin \left(2u+1\right), 0\right)
+            \]
+            Observe that $\alpha''(t) = -40 \cdot \left(\cos\left(2t+1\right), \sin \left(2t+1\right), 0\right)$ is a scalar
+            multiple of $N$, and is hence orthogonal to the surface $M$. Therefore $\alpha$ is a geodesic.
+        \end{solution}
+
+        \question Show that the unit speed geodesics on a round sphere take the form of segments if great circles.
+
+        \begin{solution}
+            Let $\alpha : T \rightarrow S^2(r)$ be a unit speed geodesic. We know that $|\alpha''(t)| > 0$ as geodesics have
+            constant speed. We may assume W.L.O.G that $N_\alpha = N$. Then we get
+            \begin{align*}
+                S(T_\alpha) = \nabla_{T_\alpha}N &= \nabla_{T_\alpha}N_\alpha \\
+                &= -N_\alpha' \\
+                &= - \left[ \kappa T_\alpha + \tau B_\alpha \right]
+            \end{align*}
+            We also know from Q1 that
+            \[ S(T_\alpha) = -\frac{T_\alpha}{r} \]
+            For these two equations to be equal it must be that
+            \[
+                \kappa = \frac{1}{r}
+            \]
+            and
+            \[
+                \tau = 0
+            \]
+            We have already shown that for a curve with no torsion and $\kappa = \nicefrac{1}{r}$ that it is a circle with
+            radius $r$. The only circles with radius $r$ are the great circles on the surface.
         \end{solution}
     \end{questions}
 \end{document}
